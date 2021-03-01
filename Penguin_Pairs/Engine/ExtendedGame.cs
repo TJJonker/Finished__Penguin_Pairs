@@ -13,7 +13,7 @@ namespace Engine
         protected Point worldSize;
         protected Point windowSize;
         protected Matrix spriteScale;
-        protected static GameStateManager GameStateManager { get; private set; }
+        public static GameStateManager GameStateManager { get; private set; }
         public static Random Random { get; private set; }
         public static AssetManager AssetManager { get; private set; }
 
