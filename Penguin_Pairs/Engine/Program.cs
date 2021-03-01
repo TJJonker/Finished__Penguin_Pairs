@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Penguin_Pairs
+namespace Engine
 {
     public static class Program
     {
         [STAThread]
         static void Main()
         {
-            using (var game = new PenguinPairs())
+            using (var game = new JewelJam())
                 game.Run();
         }
     }

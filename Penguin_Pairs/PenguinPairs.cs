@@ -1,15 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Engine;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Penguin_Pairs
 {
-    public class Game1 : Game
+    internal class PenguinPairs : ExtendedGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public Game1()
+        public PenguinPairs()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
