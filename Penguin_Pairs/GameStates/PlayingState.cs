@@ -6,7 +6,7 @@ namespace Penguin_Pairs
     {
         public PlayingState()
         {
-            SpriteGameObject background = new SpriteGameObject("Sprites/spr_level");
+            SpriteGameObject background = new SpriteGameObject("Sprites/spr_background_level");
             gameObjects.AddChild(background);
         }
     }

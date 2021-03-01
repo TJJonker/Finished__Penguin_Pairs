@@ -1,53 +1,44 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Penguin_Pairs
 {
     internal class PenguinPairs : ExtendedGame
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public const string StateName_Title = "TitleScreen";
+        public const string StateName_Help = "HelpScreen";
+        public const string StateName_LevelMenu = "LevelMenuScreen";
+        public const string StateName_Options = "OptionsScreen";
+        public const string StateName_Playing = "PlayingScreen";
+
+        [STAThread]
+        private static void Main()
+        {
+            PenguinPairs game = new PenguinPairs();
+            game.Run();
+        }
 
         public PenguinPairs()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
             IsMouseVisible = true;
-        }
-
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            base.LoadContent();
+            worldSize = new Point(1200, 900);
+            windowSize = new Point(1024, 768);
 
-            // TODO: use this.Content to load your game content here
-        }
+            FullScreen = false;
 
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            GameStateManager.AddGameState(StateName_Title, new TitleMenuState());
+            GameStateManager.AddGameState(StateName_Help, new HelpState());
+            GameStateManager.AddGameState(StateName_LevelMenu, new LevelMenuState());
+            GameStateManager.AddGameState(StateName_Options, new OptionsMenuState());
+            GameStateManager.AddGameState(StateName_Playing, new PlayingState());
 
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
+            GameStateManager.SwitchTo(StateName_Title);
         }
     }
 }
