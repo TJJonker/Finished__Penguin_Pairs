@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace Engine
@@ -35,6 +36,21 @@ namespace Engine
         public void Update(GameTime gameTime)
         {
             currentGameState?.Update(gameTime);
+        }
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            currentGameState?.Draw(gameTime, spriteBatch);
+        }
+
+        public void HandleInput(InputHelper inputHelper)
+        {
+            currentGameState?.HandleInput(inputHelper);
+        }
+
+        public void Reset()
+        {
+            currentGameState?.Reset();
         }
     }
 }

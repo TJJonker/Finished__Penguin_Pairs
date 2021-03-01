@@ -14,8 +14,7 @@ namespace Engine
         protected Point worldSize;
         protected Point windowSize;
         protected Matrix spriteScale;
-        protected static GameObjectList gameWorld;
-
+        protected static GameStateManager GameStateManager { get; private set; }
         public static Random Random { get; private set; }
         public static AssetManager AssetManager { get; private set; }
 
@@ -42,13 +41,13 @@ namespace Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
             AssetManager = new AssetManager(Content);
             FullScreen = false;
-            gameWorld = new GameObjectList();
+            GameStateManager = new GameStateManager();
         }
 
         protected override void Update(GameTime gameTime)
         {
             HandleInput();
-            gameWorld.Update(gameTime);
+            GameStateManager.Update(gameTime);
         }
 
         protected virtual void HandleInput()
@@ -60,7 +59,7 @@ namespace Engine
             if (inputHelper.KeyPressed(Keys.F5))
                 FullScreen = !FullScreen;
 
-            gameWorld.HandleInput(inputHelper);
+            GameStateManager.HandleInput(inputHelper);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -69,7 +68,7 @@ namespace Engine
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, spriteScale);
 
-            gameWorld.Draw(gameTime, spriteBatch);
+            GameStateManager.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
         }
