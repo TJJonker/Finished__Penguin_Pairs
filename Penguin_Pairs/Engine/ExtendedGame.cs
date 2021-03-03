@@ -28,7 +28,7 @@ namespace Engine
             Content.RootDirectory = "Content";
             graphics = new GraphicsDeviceManager(this);
 
-            inputHelper = new InputHelper();
+            inputHelper = new InputHelper(this);
             Random = new Random();
 
             windowSize = new Point(1024, 768);

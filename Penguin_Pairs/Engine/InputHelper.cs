@@ -7,6 +7,12 @@ namespace Engine
     {
         private MouseState currentMouseState, previousMouseState;
         private KeyboardState currentKeyboardState, previousKeyboardState;
+        private ExtendedGame game;
+
+        public InputHelper(ExtendedGame extendedGame)
+        {
+            game = extendedGame;
+        }
 
         public void Update()
         {
@@ -29,9 +35,14 @@ namespace Engine
             return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released;
         }
 
-        public Vector2 MousePosition
+        public Vector2 MousePositionScreen
         {
             get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
+        }
+
+        public Vector2 MousePositionWorld
+        {
+            get { return game.ScreenToWorld(MousePositionScreen); }
         }
     }
 }
