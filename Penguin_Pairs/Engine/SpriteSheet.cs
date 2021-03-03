@@ -22,6 +22,17 @@ namespace Engine
             sheetRows = 1;
             this.sheetIndex = sheetIndex;
 
+            // Reading cols and rows from spriteName
+            string[] assetSplit = assetName.Split('@');
+            if(assetSplit.Length >= 2)
+            {
+                string sheetNrData = assetSplit[assetSplit.Length - 1];
+                string[] colAndRow = sheetNrData.Split('x');
+                sheetColumns = int.Parse(colAndRow[0]);
+                if(colAndRow.Length == 2) sheetRows = int.Parse(colAndRow[1]);
+            }
+
+
             int columnIndex = sheetIndex % sheetColumns;
             int rowIndex = sheetIndex / sheetColumns;
             spriteRectangle = new Rectangle(columnIndex * Width, rowIndex * Height, Width, Height);
