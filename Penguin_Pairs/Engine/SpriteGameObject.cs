@@ -6,17 +6,18 @@ namespace Engine
     internal class SpriteGameObject : GameObject
     {
         protected SpriteSheet sprite;
-        protected Vector2 origin;
 
         public int Width { get { return sprite.Width; } }
         public int Height { get { return sprite.Height; } }
+
+        public Vector2 Origin { get; set; }
 
         public int SheetIndex { get { return sprite.SheetIndex; } set { sprite.SheetIndex = value; } } 
 
         public SpriteGameObject(string spriteName)
         {
             sprite = new SpriteSheet(spriteName);
-            origin = Vector2.Zero;
+            Origin = Vector2.Zero;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Engine
             get
             {
                 Rectangle spriteBounds = sprite.Bounds;
-                spriteBounds.Offset(GlobalPosition - origin);
+                spriteBounds.Offset(GlobalPosition - Origin);
                 return spriteBounds;
             }
         }
@@ -36,12 +37,12 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (Visible)
-                sprite.Draw(spriteBatch, GlobalPosition, origin);
+                sprite.Draw(spriteBatch, GlobalPosition, Origin);
         }
 
         public void SetOriginToCenter()
         {
-            origin = new Vector2(Width / 2, Height / 2);
+            Origin = new Vector2(Width / 2, Height / 2);
         }
     }
 }

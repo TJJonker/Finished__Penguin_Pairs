@@ -35,6 +35,11 @@ namespace Engine
             return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released;
         }
 
+        public bool MouseLeftButtonDown()
+        {
+            return currentMouseState.LeftButton == ButtonState.Pressed;
+        }
+
         public Vector2 MousePositionScreen
         {
             get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
