@@ -11,6 +11,7 @@ namespace Penguin_Pairs
         public const string StateName_LevelMenu = "LevelMenuScreen";
         public const string StateName_Options = "OptionsScreen";
         public const string StateName_Playing = "PlayingScreen";
+        public static bool HintsEnabled { get; set; }
 
         [STAThread]
         private static void Main()
@@ -22,6 +23,7 @@ namespace Penguin_Pairs
         public PenguinPairs()
         {
             IsMouseVisible = true;
+            HintsEnabled = true;
         }
 
         protected override void LoadContent()

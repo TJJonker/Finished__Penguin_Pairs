@@ -27,7 +27,7 @@ namespace Engine.UI
             }
         }
 
-        public Slider(string foreGroundSprite, string backGroundsprite, float minValue, float maxValue, float padding)
+        public Slider(string backGroundsprite, string foreGroundSprite, float minValue, float maxValue, float padding)
         {
             back = new SpriteGameObject(backGroundsprite);
             AddChild(back);
@@ -41,7 +41,7 @@ namespace Engine.UI
             this.padding = padding;
 
             previousValue = this.minValue;
-            currentValue = previousValue;
+            Value = previousValue;
         }
 
         public override void HandleInput(InputHelper inputHelper)
@@ -56,7 +56,7 @@ namespace Engine.UI
             {
                 float correctedX = mousePos.X - GlobalPosition.X - minimumLocalX;
                 float newFraction = correctedX / availableWidth;
-                Value = newFraction * Range + minimumLocalX;
+                Value = newFraction * Range + minValue;
             }
         }
     }
