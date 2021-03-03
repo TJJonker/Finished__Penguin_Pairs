@@ -5,15 +5,17 @@ namespace Engine
 {
     internal class SpriteGameObject : GameObject
     {
-        protected Texture2D sprite;
+        protected SpriteSheet sprite;
         protected Vector2 origin;
 
         public int Width { get { return sprite.Width; } }
         public int Height { get { return sprite.Height; } }
 
+        public int SheetIndex { get { return sprite.SheetIndex; } set { sprite.SheetIndex = value; } } 
+
         public SpriteGameObject(string spriteName)
         {
-            sprite = ExtendedGame.AssetManager.LoadSprite(spriteName);
+            sprite = new SpriteSheet(spriteName);
             origin = Vector2.Zero;
         }
 
@@ -34,7 +36,7 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (Visible)
-                spriteBatch.Draw(sprite, GlobalPosition, null, Color.White, 0, origin, 1.0f, SpriteEffects.None, 0);
+                sprite.Draw(spriteBatch, GlobalPosition, origin);
         }
 
         public void SetOriginToCenter()

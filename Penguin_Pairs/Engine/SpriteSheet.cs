@@ -48,10 +48,7 @@ namespace Engine
                 if(colAndRow.Length == 2) sheetRows = int.Parse(colAndRow[1]);
             }
 
-
-            int columnIndex = sheetIndex % sheetColumns;
-            int rowIndex = sheetIndex / sheetColumns;
-            spriteRectangle = new Rectangle(columnIndex * Width, rowIndex * Height, Width, Height);
+            SheetIndex = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin)
