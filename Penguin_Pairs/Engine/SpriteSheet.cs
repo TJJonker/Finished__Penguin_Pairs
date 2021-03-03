@@ -15,6 +15,22 @@ namespace Engine
         public Rectangle Bounds { get { return new Rectangle(0, 0, Width, Height); } }
         public int NumberOfSheetElements { get { return sheetColumns * sheetRows; } }
 
+        public int SheetIndex
+        {
+            get { return sheetIndex; }
+            set
+            {
+                if(value >= 0 && value < NumberOfSheetElements)
+                {
+                    sheetIndex = value;
+
+                    int columnIndex = sheetIndex % sheetColumns;
+                    int rowIndex = sheetIndex / sheetColumns;
+                    spriteRectangle = new Rectangle(columnIndex * Width, rowIndex * Height, Width, Height);
+                }
+            }
+        }
+
         public SpriteSheet(string assetName, int sheetIndex = 0)
         {
             sprite = ExtendedGame.AssetManager.LoadSprite(assetName);
