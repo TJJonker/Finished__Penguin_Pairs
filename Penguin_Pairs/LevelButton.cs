@@ -14,13 +14,13 @@ namespace Penguin_Pairs
         public LevelButton(int levelIndex, LevelStatus startStatus) : base(getSpriteNameForStatus(startStatus))
         {
             LevelIndex = levelIndex;
-            status = startStatus;
+            Status = startStatus;
 
             label = new TextGameObject("Fonts/ScoreFont", Color.Black, TextGameObject.Alignment.Center)
             {
                 Position = sprite.Center + new Vector2(0, 12),
                 Parent = this,
-                Text = LevelIndex.ToString()
+                Text = levelIndex.ToString()
             };
         }
 
