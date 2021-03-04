@@ -46,6 +46,15 @@ namespace Penguin_Pairs
             base.HandleInput(inputHelper);
             if (backButton.Pressed)
                 ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_Title);
+
+            foreach(LevelButton button in levelButtons)
+            {
+                if(button.Pressed && button.Status != LevelStatus.Locked)
+                {
+                    ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_Playing);
+                    return;
+                }
+            }
         }
     }
 }

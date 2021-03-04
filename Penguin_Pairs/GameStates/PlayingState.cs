@@ -38,6 +38,7 @@ namespace Penguin_Pairs
 
         public override void HandleInput(InputHelper inputHelper)
         {
+            base.HandleInput(inputHelper);
             if (quitButton.Pressed)
                 ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_LevelMenu);
         }
