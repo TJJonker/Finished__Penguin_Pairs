@@ -14,10 +14,11 @@ namespace Engine
 
         public int SheetIndex { get { return sprite.SheetIndex; } set { sprite.SheetIndex = value; } } 
 
-        public SpriteGameObject(string spriteName)
+        public SpriteGameObject(string spriteName, int sheetIndex = 0)
         {
             sprite = new SpriteSheet(spriteName);
             Origin = Vector2.Zero;
+            SheetIndex = sheetIndex;
         }
 
         /// <summary>

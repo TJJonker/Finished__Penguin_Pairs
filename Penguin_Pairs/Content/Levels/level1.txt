@@ -1,0 +1,14 @@
+Pair the Penguins
+Click on a Penguin. Then use the arrows to let it move.
+1
+4 3 down
+
+#########
+#.......#
+#...r...#
+#.......#
+#.......#
+#.......#
+#...r...#
+#.......#
+#########
