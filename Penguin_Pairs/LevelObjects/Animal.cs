@@ -1,6 +1,6 @@
 ﻿using Engine;
 
-namespace Penguin_Pairs.LevelObjects
+namespace Penguin_Pairs
 {
     internal abstract class Animal : SpriteGameObject
     {
