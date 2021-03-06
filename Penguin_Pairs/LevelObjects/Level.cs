@@ -10,6 +10,8 @@ namespace Penguin_Pairs.LevelObjects
         private const int TileWidth = 73;
         private const int TileHeight = 72;
 
+        const string MovableAnimalLetters = "brgycpmx";
+
         public int LevelIndex { get; private set; }
         private int targetNuberOfPairs;
 
@@ -130,7 +132,43 @@ namespace Penguin_Pairs.LevelObjects
             tiles[x, y] = tile;
         }
 
+        private void AddAnimal(int x, int y, char symbol)
+        {
+            Animal result = null;
 
+            // TODO: check if symbol is an animal
+            if (symbol == '@') result = new Shark();
+
+            if(result == null)
+            {
+                int animalIndex = GetAnimalIndex(symbol);
+                if (animalIndex >= 0)
+                    result = new MovableAnimal(animalIndex, false);
+            }
+
+            if(result == null)
+            {
+                int animalIndex = GetAnimalInHoleIndex(symbol);
+                if (animalIndex >= 0)
+                    result = new MovableAnimal(animalIndex, true);
+            }
+
+            if(result != null)
+            {
+                result.Position = GetCellPosition(x, y);
+                animalsOnTiles[x, y] = result;
+            }
+        }
+
+        private int GetAnimalIndex(char symbol)
+        {
+            return MovableAnimalLetters.IndexOf(symbol);
+        }
+
+        private int GetAnimalInHoleIndex(char symbol)
+        {
+            return MovableAnimalLetters.ToUpper().IndexOf(symbol);
+        }
 
         private int StringToDirection(string direction)
         {
