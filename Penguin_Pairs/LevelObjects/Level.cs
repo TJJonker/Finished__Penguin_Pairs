@@ -1,5 +1,6 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Penguin_Pairs.LevelObjects
@@ -47,7 +48,21 @@ namespace Penguin_Pairs.LevelObjects
             hintArrow = new SpriteGameObject("Sprites/LevelObjects/spr_arrow_hint@4", hintDirection);
             hintArrow.Position = GetCellPosition(hintX, hintY);
 
+            int gridWidth = 0;
 
+            List<string> gridRows = new List<string>();
+            string line = reader.ReadLine();
+            while(line != null)
+            {
+                if (line.Length > gridWidth)
+                    gridWidth = line.Length;
+
+                gridRows.Add(line);
+                line = reader.ReadLine();
+            }
+            reader.Close();
+
+            AddPlayingField(gridRows, gridWidth, gridRows.Count);
         }
 
         private void AddLevelInfoObjects(string title, string description)
@@ -67,6 +82,11 @@ namespace Penguin_Pairs.LevelObjects
             descriptionObject.Text = description;
             descriptionObject.Position = new Vector2(600, 820);
             AddChild(descriptionObject);
+        }
+
+        private void AddPlayingField(List<string> grid, int gridWidth, int gridHeight)
+        {
+
         }
 
         private int StringToDirection(string direction)
