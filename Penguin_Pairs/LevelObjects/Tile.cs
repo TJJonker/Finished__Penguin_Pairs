@@ -16,9 +16,9 @@ namespace Penguin_Pairs
             TileType = type;
 
             // Adding corresponding image
-            if (type == Type.Wall) image = new SpriteGameObject("Sprites/LevelObject/spr_wall");
-            else if (type == Type.Hole) image = new SpriteGameObject("Sprites/LevelObject/spr_hole");
-            else if (type == Type.Normal) image = new SpriteGameObject("Sprites/LevelObject/spr_field@2", (x+y) % 2);
+            if (type == Type.Wall) image = new SpriteGameObject("Sprites/LevelObjects/spr_wall");
+            else if (type == Type.Hole) image = new SpriteGameObject("Sprites/LevelObjects/spr_hole");
+            else if (type == Type.Normal) image = new SpriteGameObject("Sprites/LevelObjects/spr_field@2", (x+y) % 2);
 
             if (image != null) image.Parent = this;
         }

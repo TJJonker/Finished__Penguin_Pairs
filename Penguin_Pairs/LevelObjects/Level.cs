@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Penguin_Pairs.LevelObjects
+namespace Penguin_Pairs
 {
     internal class Level : GameObjectList
     {
@@ -75,12 +75,12 @@ namespace Penguin_Pairs.LevelObjects
             levelInfo.Position = new Vector2(600, 820);
             AddChild(levelInfo);
 
-            TextGameObject titleObject = new TextGameObject("Font/HelpFont", Color.Blue, TextGameObject.Alignment.Center);
+            TextGameObject titleObject = new TextGameObject("Fonts/HelpFont", Color.Blue, TextGameObject.Alignment.Center);
             titleObject.Text = LevelIndex + " - " + title;
             titleObject.Position = new Vector2(600, 786);
             AddChild(titleObject);
 
-            TextGameObject descriptionObject = new TextGameObject("Font/HelpFont", Color.Blue, TextGameObject.Alignment.Center);
+            TextGameObject descriptionObject = new TextGameObject("Fonts/HelpFont", Color.Blue, TextGameObject.Alignment.Center);
             descriptionObject.Text = description;
             descriptionObject.Position = new Vector2(600, 820);
             AddChild(descriptionObject);

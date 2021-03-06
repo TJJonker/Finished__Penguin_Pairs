@@ -52,6 +52,8 @@ namespace Penguin_Pairs
                 if(button.Pressed && button.Status != LevelStatus.Locked)
                 {
                     ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_Playing);
+                    PlayingState playingstate = (PlayingState)ExtendedGame.GameStateManager.GetGameState(PenguinPairs.StateName_Playing);
+                    playingstate.LoadLevel(button.LevelIndex);
                     return;
                 }
             }

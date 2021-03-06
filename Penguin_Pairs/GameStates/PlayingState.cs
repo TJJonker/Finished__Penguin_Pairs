@@ -1,12 +1,14 @@
 ﻿using Engine;
 using Engine.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Penguin_Pairs
 {
     internal class PlayingState : GameState
     {
         private Button hintButton, retryButton, quitButton;
+        private Level level;
 
         public PlayingState()
         {
@@ -41,6 +43,29 @@ namespace Penguin_Pairs
             base.HandleInput(inputHelper);
             if (quitButton.Pressed)
                 ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_LevelMenu);
+
+            if (level != null)
+                level.HandleInput(inputHelper);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (level != null)
+                level.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
+            if (level != null)
+                level.Draw(gameTime, spriteBatch);
+        }
+
+        public void LoadLevel(int levelIndex)
+        {
+            level = new Level(levelIndex, "Content/Levels/level" + levelIndex + ".txt");
+            hintButton.Visible = PenguinPairs.HintsEnabled;
         }
     }
 }
