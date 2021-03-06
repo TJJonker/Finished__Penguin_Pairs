@@ -84,10 +84,46 @@ namespace Penguin_Pairs.LevelObjects
             AddChild(descriptionObject);
         }
 
-        private void AddPlayingField(List<string> grid, int gridWidth, int gridHeight)
+        private void AddPlayingField(List<string> gridRows, int gridWidth, int gridHeight)
         {
+            GameObjectList playingField = new GameObjectList();
 
+            Vector2 gridSize = new Vector2(gridWidth * TileWidth, gridHeight * TileHeight);
+            playingField.Position = new Vector2(600, 420) - gridSize / 2f;
+
+            tiles = new Tile[gridWidth, gridHeight];
+            animalsOnTiles = new Animal[gridWidth, gridHeight];
+
+            for (int y = 0; y < gridHeight; y++)
+            {
+                string row = gridRows[y];
+                for(int x = 0; x < gridWidth; x++)
+                {
+                    char symbol = ' ';
+                    if (x < row.Length)
+                        symbol = row[x];
+
+                    AddTile(x, y, symbol);
+                    AddAnimal(x, y, symbol);
+                }
+            }
+
+            for (int y = 0; y < gridHeight; y++)
+                for (int x = 0; x < gridWidth; x++)
+                    playingField.AddChild(tiles[x, y]);
+
+            for (int y = 0; y < gridHeight; y++)
+                for (int x = 0; x < gridWidth; x++)
+                    if (animalsOnTiles[x, y] != null)
+                        playingField.AddChild(animalsOnTiles[x, y]);
+
+            hintArrow.Visible = false;
+            playingField.AddChild(hintArrow);
+
+            AddChild(playingField);
         }
+
+
 
         private int StringToDirection(string direction)
         {
