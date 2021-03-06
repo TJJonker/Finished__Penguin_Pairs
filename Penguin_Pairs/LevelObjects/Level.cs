@@ -123,6 +123,13 @@ namespace Penguin_Pairs.LevelObjects
             AddChild(playingField);
         }
 
+        private void AddTile(int x, int y, char symbol)
+        {
+            Tile tile = new Tile(CharToTileType(symbol), x, y);
+            tile.Position = GetCellPosition(x, y);
+            tiles[x, y] = tile;
+        }
+
 
 
         private int StringToDirection(string direction)
@@ -131,6 +138,18 @@ namespace Penguin_Pairs.LevelObjects
             if (direction == "Up") return 1;
             if (direction == "Left") return 2;
             return 3;
+        }
+
+        private Tile.Type CharToTileType(char symbol)
+        {
+            if (symbol == ' ') return Tile.Type.Empty;
+            if (symbol == '.') return Tile.Type.Normal;
+            if (symbol == '#') return Tile.Type.Wall;
+            if (symbol == '_') return Tile.Type.Hole;
+
+            if ("BRGYCPMX".Contains(symbol)) return Tile.Type.Hole;
+
+            return Tile.Type.Normal;
         }
     }
 }
