@@ -24,7 +24,7 @@ namespace Penguin_Pairs
             return progress[levelIndex - 1];
         }
 
-        private void SetLevelStatus(int levelIndex, LevelStatus status)
+        private static void SetLevelStatus(int levelIndex, LevelStatus status)
         {
             progress[levelIndex - 1] = status;
         }
@@ -72,6 +72,29 @@ namespace Penguin_Pairs
                 line = reader.ReadLine();
             }
             reader.Close();
+        }
+
+        private static void SaveProgress()
+        {
+            StreamWriter w = new StreamWriter("Content/Levels/level_status.txt");
+            foreach(LevelStatus status in progress)
+            {
+                if (status == LevelStatus.Locked)
+                    w.WriteLine("locked");
+                else if (status == LevelStatus.Unlocked)
+                    w.WriteLine("unlocked");
+                else w.WriteLine("solved");
+            }
+            w.Close();
+        }
+
+        public static void MarkLevelAsSolved(int levelIndex)
+        {
+            SetLevelStatus(levelIndex, LevelStatus.Solved);
+            if (levelIndex < NumberOfLevels && GetLevelStatus(levelIndex + 1) == LevelStatus.Locked)
+                SetLevelStatus(levelIndex + 1, LevelStatus.Unlocked);
+
+            SaveProgress();
         }
 
         private LevelStatus TextToLevelStatus(string text)
