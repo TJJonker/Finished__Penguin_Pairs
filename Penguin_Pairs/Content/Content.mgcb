@@ -403,3 +403,6 @@
 #begin Levels/level12.txt
 /copy:Levels/level12.txt
 
+#begin Levels/levels_status.txt
+/copy:Levels/levels_status.txt
+
