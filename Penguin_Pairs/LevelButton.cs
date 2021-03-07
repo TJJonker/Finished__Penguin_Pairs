@@ -44,7 +44,7 @@ namespace Penguin_Pairs
         private static string getSpriteNameForStatus(LevelStatus status)
         {
             if (status == LevelStatus.Locked) return "Sprites/UI/spr_level_locked";
-            if (status == LevelStatus.Unlocked) return "Sprites/UI/spr_level_unlocked";
+            if (status == LevelStatus.Unlocked) return "Sprites/UI/spr_level_unsolved";
             return "Sprites/UI/spr_level_solved@6";
         }
     }

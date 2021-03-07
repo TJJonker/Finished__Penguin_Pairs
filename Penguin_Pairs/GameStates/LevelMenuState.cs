@@ -18,7 +18,7 @@ namespace Penguin_Pairs
             backButton.Position = new Vector2(415, 720);
             gameObjects.AddChild(backButton);
 
-            int numberOfLevels = 12;
+            int numberOfLevels = PenguinPairs.NumberOfLevels;
             levelButtons = new LevelButton[numberOfLevels];
 
             Vector2 gridOffset = new Vector2(155, 230);
@@ -28,7 +28,7 @@ namespace Penguin_Pairs
 
             for(int i = 0; i < numberOfLevels; i++)
             {
-                LevelButton levelButton = new LevelButton(i + 1, LevelStatus.Solved);
+                LevelButton levelButton = new LevelButton(i + 1, PenguinPairs.GetLevelStatus(i + 1));
 
                 int row = i / buttonsPerRow;
                 int column = i % buttonsPerRow;
