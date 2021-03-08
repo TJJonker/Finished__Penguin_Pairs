@@ -24,7 +24,8 @@ namespace Penguin_Pairs
 
         private bool IsMoving { get { return Position != targetWorldPosition; } }
 
-        public MovableAnimal(int animalIndex, bool isInHole, Level level, Point gridPosition) : base(level, gridPosition, GetSpriteName(isInHole), animalIndex)
+        public MovableAnimal(int animalIndex, bool isInHole, Level level, Point gridPosition) : 
+            base(level, gridPosition, GetSpriteName(isInHole), animalIndex)
         {
             this.isInHole = isInHole;
             targetWorldPosition = Position;
@@ -39,6 +40,15 @@ namespace Penguin_Pairs
             }
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if(IsMoving && Vector2.Distance(Position, targetWorldPosition) < speed * gameTime.ElapsedGameTime.TotalSeconds)
+            {
+                ApplyCurrentPosition();
+            }
+        }
+
         private static string GetSpriteName(bool isInHole)
         {
             if (isInHole)
@@ -48,6 +58,18 @@ namespace Penguin_Pairs
 
         public void TryMoveInDirection(Point direction)
         {
+            if (!CanMoveInDirection(direction))
+                return;
+
+            level.RemoveAnimalFromGrid(currentGridPosition);
+            while (CanMoveInDirection(direction))
+                currentGridPosition += direction;
+
+            targetWorldPosition = level.GetCellPosition(currentGridPosition.X, currentGridPosition.Y);
+
+            Vector2 dir = targetWorldPosition - Position;
+            dir.Normalize();
+            velocity = dir * speed;
         }
 
         public bool CanMoveInDirection(Point direction)
