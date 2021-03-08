@@ -19,9 +19,18 @@ namespace Penguin_Pairs
             }
         }
 
-        public MovableAnimal(int animalIndex, bool isInHole) : base(GetSpriteName(isInHole), animalIndex)
+        public MovableAnimal(int animalIndex, bool isInHole, Level level) : base(level, GetSpriteName(isInHole), animalIndex)
         {
             this.isInHole = isInHole;
+        }
+
+        public override void HandleInput(InputHelper inputHelper)
+        {
+            if (Visible && BoundingBox.Contains(inputHelper.MousePositionWorld)
+                && inputHelper.MouseLeftButtonPressed())
+            {
+                level.SelectAnimal(this);
+            }
         }
 
         private static string GetSpriteName(bool isInHole)
@@ -33,7 +42,6 @@ namespace Penguin_Pairs
 
         public void TryMoveInDirection(Point direction)
         {
-
         }
 
         public bool CanMoveInDirection(Point direction)

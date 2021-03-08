@@ -20,7 +20,7 @@ namespace Penguin_Pairs
             if (BoundingBox.Contains(inputHelper.MousePositionWorld))
                 sprite = hoverSprite;
             else
-                sprite = hoverSprite;
+                sprite = normalSprite;
         }
     }
 }

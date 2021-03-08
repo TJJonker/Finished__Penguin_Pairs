@@ -12,6 +12,8 @@ namespace Penguin_Pairs
 
         const string MovableAnimalLetters = "brgycpmx";
 
+        private MovableAnimalSelector selector;
+
         public int LevelIndex { get; private set; }
         private int targetNuberOfPairs;
 
@@ -122,7 +124,15 @@ namespace Penguin_Pairs
             hintArrow.Visible = false;
             playingField.AddChild(hintArrow);
 
+            selector = new MovableAnimalSelector();
+            playingField.AddChild(selector);
+
             AddChild(playingField);
+        }
+
+        public void SelectAnimal(MovableAnimal animal)
+        {
+            selector.SelectedAnimal = animal;
         }
 
         private void AddTile(int x, int y, char symbol)
@@ -137,20 +147,20 @@ namespace Penguin_Pairs
             Animal result = null;
 
             // TODO: check if symbol is an animal
-            if (symbol == '@') result = new Shark();
+            if (symbol == '@') result = new Shark(this);
 
             if(result == null)
             {
                 int animalIndex = GetAnimalIndex(symbol);
                 if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, false);
+                    result = new MovableAnimal(animalIndex, false, this);
             }
 
             if(result == null)
             {
                 int animalIndex = GetAnimalInHoleIndex(symbol);
                 if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, true);
+                    result = new MovableAnimal(animalIndex, true, this);
             }
 
             if(result != null)

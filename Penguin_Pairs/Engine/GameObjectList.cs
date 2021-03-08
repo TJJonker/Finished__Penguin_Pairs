@@ -21,8 +21,8 @@ namespace Engine
 
         public override void HandleInput(InputHelper inputHelper)
         {
-            foreach (GameObject obj in children)
-                obj.HandleInput(inputHelper);
+            for (int i = children.Count - 1; i >= 0; i--)
+                children[i].HandleInput(inputHelper);
         }
 
         public override void Update(GameTime gameTime)

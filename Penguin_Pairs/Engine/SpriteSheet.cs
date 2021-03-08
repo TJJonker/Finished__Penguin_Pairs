@@ -36,7 +36,6 @@ namespace Engine
             sprite = ExtendedGame.AssetManager.LoadSprite(assetName);
             sheetColumns = 1;
             sheetRows = 1;
-            this.sheetIndex = sheetIndex;
 
             // Reading cols and rows from spriteName
             string[] assetSplit = assetName.Split('@');
@@ -48,7 +47,7 @@ namespace Engine
                 if(colAndRow.Length == 2) sheetRows = int.Parse(colAndRow[1]);
             }
 
-            SheetIndex = 0;
+            SheetIndex = sheetIndex;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin)

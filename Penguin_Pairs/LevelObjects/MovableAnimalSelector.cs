@@ -21,18 +21,19 @@ namespace Penguin_Pairs
 
         public MovableAnimalSelector()
         {
+            // define the four directions
             directions = new Point[4];
             directions[0] = new Point(1, 0);
             directions[1] = new Point(0, -1);
             directions[2] = new Point(-1, 0);
             directions[3] = new Point(0, 1);
 
+            // add the four arrows
             arrows = new Arrow[4];
             for (int i = 0; i < 4; i++)
             {
-                arrows[i].Position = new Vector2(
-                    directions[i].X * arrows[i].Width,
-                    directions[i].Y * arrows[i].Height);
+                arrows[i] = new Arrow(i);
+                arrows[i].Position = new Vector2(directions[i].X * arrows[i].Width, directions[i].Y * arrows[i].Height);
                 AddChild(arrows[i]);
             }
 
