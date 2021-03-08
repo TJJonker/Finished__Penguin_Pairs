@@ -33,6 +33,7 @@ namespace Engine
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!Visible) return;
             foreach (GameObject obj in children)
                 obj.Draw(gameTime, spriteBatch);
         }

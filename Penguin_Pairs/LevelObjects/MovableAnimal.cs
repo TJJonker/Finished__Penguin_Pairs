@@ -1,4 +1,6 @@
 ﻿using Engine;
+using Microsoft.Xna.Framework;
+
 namespace Penguin_Pairs
 {
     internal class MovableAnimal : Animal
@@ -27,6 +29,16 @@ namespace Penguin_Pairs
             if (isInHole)
                 return "Sprites/LevelObjects/spr_penguin_boxed@8";
             return "Sprites/LevelObjects/spr_penguin@8";
+        }
+
+        public void TryMoveInDirection(Point direction)
+        {
+
+        }
+
+        public bool CanMoveInDirection(Point direction)
+        {
+            return true;
         }
     }
 }
