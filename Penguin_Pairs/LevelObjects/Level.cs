@@ -28,7 +28,7 @@ namespace Penguin_Pairs
             LoadLevelFromFile(filename);
         }
 
-        private Vector2 GetCellPosition(int x, int y)
+        public Vector2 GetCellPosition(int x, int y)
         {
             return new Vector2(x * TileWidth, y * TileHeight);
         }
@@ -147,27 +147,31 @@ namespace Penguin_Pairs
             Animal result = null;
 
             // TODO: check if symbol is an animal
-            if (symbol == '@') result = new Shark(this);
+            if (symbol == '@') result = new Shark(this, new Point(x, y));
 
             if(result == null)
             {
                 int animalIndex = GetAnimalIndex(symbol);
                 if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, false, this);
+                    result = new MovableAnimal(animalIndex, false, this, new Point(x, y));
             }
 
             if(result == null)
             {
                 int animalIndex = GetAnimalInHoleIndex(symbol);
                 if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, true, this);
+                    result = new MovableAnimal(animalIndex, true, this, new Point(x, y));
             }
+        }
 
-            if(result != null)
-            {
-                result.Position = GetCellPosition(x, y);
-                animalsOnTiles[x, y] = result;
-            }
+        public void AddAnimalToGrid(Animal animal, Point gridPosition)
+        {
+            animalsOnTiles[gridPosition.X, gridPosition.Y] = animal;
+        }
+
+        public void RemoveAnimalFromGrid(Point gridPosition)
+        {
+            animalsOnTiles[gridPosition.X, gridPosition.Y] = null;
         }
 
         private int GetAnimalIndex(char symbol)

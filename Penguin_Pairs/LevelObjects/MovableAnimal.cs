@@ -7,6 +7,9 @@ namespace Penguin_Pairs
     {
         private bool isInHole;
 
+        private Vector2 targetWorldPosition;
+        const float speed = 300f;
+
         public int AnimalIndex { get { return SheetIndex; } }
 
         public bool IsInHole
@@ -19,9 +22,12 @@ namespace Penguin_Pairs
             }
         }
 
-        public MovableAnimal(int animalIndex, bool isInHole, Level level) : base(level, GetSpriteName(isInHole), animalIndex)
+        private bool IsMoving { get { return Position != targetWorldPosition; } }
+
+        public MovableAnimal(int animalIndex, bool isInHole, Level level, Point gridPosition) : base(level, gridPosition, GetSpriteName(isInHole), animalIndex)
         {
             this.isInHole = isInHole;
+            targetWorldPosition = Position;
         }
 
         public override void HandleInput(InputHelper inputHelper)
