@@ -1,6 +1,7 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace Penguin_Pairs
@@ -10,7 +11,7 @@ namespace Penguin_Pairs
         private const int TileWidth = 73;
         private const int TileHeight = 72;
 
-        const string MovableAnimalLetters = "brgycpmx";
+        private const string MovableAnimalLetters = "brgycpmx";
 
         private MovableAnimalSelector selector;
 
@@ -22,8 +23,10 @@ namespace Penguin_Pairs
 
         private SpriteGameObject hintArrow;
 
-        int GridWidth { get { return tiles.GetLength(0); } }
-        int GridHeight { get { return tiles.GetLength(1); } }
+        private int GridWidth
+        { get { return tiles.GetLength(0); } }
+        private int GridHeight
+        { get { return tiles.GetLength(1); } }
 
         public Level(int levelIndex, string filename)
         {
@@ -59,7 +62,7 @@ namespace Penguin_Pairs
 
             List<string> gridRows = new List<string>();
             string line = reader.ReadLine();
-            while(line != null)
+            while (line != null)
             {
                 if (line.Length > gridWidth)
                     gridWidth = line.Length;
@@ -96,7 +99,7 @@ namespace Penguin_Pairs
             GameObjectList playingField = new GameObjectList();
 
             Vector2 gridSize = new Vector2(gridWidth * TileWidth, gridHeight * TileHeight);
-            playingField.Position = new Vector2(600, 420) - gridSize / 2f;
+            playingField.Position = new Vector2(600, 420) - gridSize / 2.0f;
 
             tiles = new Tile[gridWidth, gridHeight];
             animalsOnTiles = new Animal[gridWidth, gridHeight];
@@ -104,7 +107,7 @@ namespace Penguin_Pairs
             for (int y = 0; y < gridHeight; y++)
             {
                 string row = gridRows[y];
-                for(int x = 0; x < gridWidth; x++)
+                for (int x = 0; x < gridWidth; x++)
                 {
                     char symbol = ' ';
                     if (x < row.Length)
@@ -166,14 +169,14 @@ namespace Penguin_Pairs
             // TODO: check if symbol is an animal
             if (symbol == '@') result = new Shark(this, new Point(x, y));
 
-            if(result == null)
+            if (result == null)
             {
                 int animalIndex = GetAnimalIndex(symbol);
                 if (animalIndex >= 0)
                     result = new MovableAnimal(animalIndex, false, this, new Point(x, y));
             }
 
-            if(result == null)
+            if (result == null)
             {
                 int animalIndex = GetAnimalInHoleIndex(symbol);
                 if (animalIndex >= 0)
