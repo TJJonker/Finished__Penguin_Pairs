@@ -21,5 +21,11 @@ namespace Penguin_Pairs
             level.AddAnimalToGrid(this, currentGridPosition);
             Position = level.GetCellPosition(currentGridPosition.X, currentGridPosition.Y);
         }
+
+        public override void Reset()
+        {
+            Visible = true;
+            ApplyCurrentPosition();
+        }
     }
 }

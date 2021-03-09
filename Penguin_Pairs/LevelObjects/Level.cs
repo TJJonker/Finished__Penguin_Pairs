@@ -40,6 +40,16 @@ namespace Penguin_Pairs
             FirstMoveMade = false;
         }
 
+        public override void Reset()
+        {
+            for (int y = 0; y < GridHeight; y++)
+                for (int x = 0; x < GridWidth; x++)
+                    animalsOnTiles[x, y] = null;
+
+            FirstMoveMade = false;
+            base.Reset();
+        }
+
         public Vector2 GetCellPosition(int x, int y)
         {
             return new Vector2(x * TileWidth, y * TileHeight);

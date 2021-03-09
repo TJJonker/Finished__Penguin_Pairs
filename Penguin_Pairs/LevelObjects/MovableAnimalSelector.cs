@@ -67,5 +67,10 @@ namespace Penguin_Pairs
                     arrows[i].Visible = SelectedAnimal.CanMoveInDirection(directions[i]);
             }
         }
+
+        public override void Reset()
+        {
+            selectedAnimal = null;
+        }
     }
 }

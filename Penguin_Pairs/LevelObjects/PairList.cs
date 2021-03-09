@@ -33,5 +33,12 @@ namespace Penguin_Pairs
             pairObjects[nrPairsMade].SheetIndex = penguinIndex;
             nrPairsMade++;
         }
+
+        public override void Reset()
+        {
+            nrPairsMade = 0;
+            for (int i = 0; i < pairObjects.Length; i++)
+                pairObjects[i].SheetIndex = 7;
+        }
     }
 }

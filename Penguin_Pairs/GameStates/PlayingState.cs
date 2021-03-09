@@ -49,6 +49,9 @@ namespace Penguin_Pairs
 
             if (hintButton.Pressed)
                 level.ShowHint();
+
+            if (retryButton.Pressed)
+                level.Reset();
         }
 
         public override void Update(GameTime gameTime)

@@ -10,6 +10,8 @@ namespace Penguin_Pairs
         private Vector2 targetWorldPosition;
         const float speed = 300f;
 
+        private Point startPosition;
+
         public int AnimalIndex { get { return SheetIndex; } }
 
         public bool IsInHole
@@ -31,6 +33,7 @@ namespace Penguin_Pairs
             base(level, gridPosition, GetSpriteName(false), animalIndex)
         {
             targetWorldPosition = Position;
+            startPosition = gridPosition;
         }
 
         public override void HandleInput(InputHelper inputHelper)
@@ -49,6 +52,16 @@ namespace Penguin_Pairs
             {
                 ApplyCurrentPosition();
             }
+        }
+
+        public override void Reset()
+        {
+            currentGridPosition = startPosition;
+            IsInHole = false;
+
+            base.Reset();
+
+            targetWorldPosition = Position;
         }
 
         private static string GetSpriteName(bool isInHole)
