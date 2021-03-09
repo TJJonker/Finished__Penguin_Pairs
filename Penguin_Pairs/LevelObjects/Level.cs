@@ -172,6 +172,12 @@ namespace Penguin_Pairs
         {
             int penguinType = MathHelper.Max(penguin1.AnimalIndex, penguin2.AnimalIndex);
             pairList.AddPair(penguinType);
+
+            if (pairList.Completed)
+            {
+                PlayingState playingState = (PlayingState)ExtendedGame.GameStateManager.GetGameState(PenguinPairs.StateName_Playing);
+                playingState.LevelCompleted(LevelIndex);
+            }
         }
 
         private void AddTile(int x, int y, char symbol)

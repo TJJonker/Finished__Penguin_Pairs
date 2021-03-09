@@ -9,6 +9,7 @@ namespace Penguin_Pairs
     {
         private Button hintButton, retryButton, quitButton;
         private Level level;
+        private SpriteGameObject completedOverlay;
 
         public PlayingState()
         {
@@ -36,6 +37,9 @@ namespace Penguin_Pairs
                 Position = new Vector2(1058, 20)
             };
             gameObjects.AddChild(quitButton);
+
+            completedOverlay = new SpriteGameObject("Sprites/spr_level_finished");
+            gameObjects.AddChild(completedOverlay);
         }
 
         public override void HandleInput(InputHelper inputHelper)
@@ -75,6 +79,15 @@ namespace Penguin_Pairs
         {
             level = new Level(levelIndex, "Content/Levels/level" + levelIndex + ".txt");
             hintButton.Visible = PenguinPairs.HintsEnabled;
+            completedOverlay.Visible = false;
+        }
+
+        public void LevelCompleted(int levelIndex)
+        {
+            completedOverlay.Visible = true;
+            level.Visible = false;
+
+            PenguinPairs.MarkLevelAsSolved(levelIndex);
         }
     }
 }
