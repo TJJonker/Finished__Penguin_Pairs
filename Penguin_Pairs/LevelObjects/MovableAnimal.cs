@@ -136,7 +136,9 @@ namespace Penguin_Pairs
                 Visible = false;
                 otherAnimal.Visible = false;
 
-                // TODO: Notify if there is a pair
+                // Notify if there is a pair
+                if (otherAnimal is MovableAnimal)
+                    level.PairFound(this, (MovableAnimal)otherAnimal);
 
                 return;
             }
