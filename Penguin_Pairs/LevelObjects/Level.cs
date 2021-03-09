@@ -22,6 +22,9 @@ namespace Penguin_Pairs
 
         private SpriteGameObject hintArrow;
 
+        int GridWidth { get { return tiles.GetLength(0); } }
+        int GridHeight { get { return tiles.GetLength(1); } }
+
         public Level(int levelIndex, string filename)
         {
             LevelIndex = levelIndex;
@@ -142,6 +145,20 @@ namespace Penguin_Pairs
             tiles[x, y] = tile;
         }
 
+        public Tile.Type GetTileType(Point gridPosition)
+        {
+            if (!IsPositionInGrid(gridPosition))
+                return Tile.Type.Empty;
+            return tiles[gridPosition.X, gridPosition.Y].TileType;
+        }
+
+        public Animal GetAnimal(Point gridPosition)
+        {
+            if (!IsPositionInGrid(gridPosition))
+                return null;
+            return animalsOnTiles[gridPosition.X, gridPosition.Y];
+        }
+
         private void AddAnimal(int x, int y, char symbol)
         {
             Animal result = null;
@@ -202,6 +219,12 @@ namespace Penguin_Pairs
             if ("BRGYCPMX".Contains(symbol)) return Tile.Type.Hole;
 
             return Tile.Type.Normal;
+        }
+
+        private bool IsPositionInGrid(Point gridPosition)
+        {
+            return gridPosition.X >= 0 && gridPosition.X < GridWidth
+                && gridPosition.Y >= 0 && gridPosition.Y < GridHeight;
         }
     }
 }

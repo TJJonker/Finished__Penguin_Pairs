@@ -22,6 +22,9 @@ namespace Penguin_Pairs
             }
         }
 
+        private bool IsSeal { get { return AnimalIndex == 7; } }
+        private bool IsMultiColoredPenguin { get { return AnimalIndex == 6; } }
+
         private bool IsMoving { get { return Position != targetWorldPosition; } }
 
         public MovableAnimal(int animalIndex, bool isInHole, Level level, Point gridPosition) : 
@@ -72,8 +75,45 @@ namespace Penguin_Pairs
             velocity = dir * speed;
         }
 
+        private bool IsPairWith(MovableAnimal other)
+        {
+            if (IsSeal || other.IsSeal)
+                return false;
+
+            if (IsMultiColoredPenguin || other.IsMultiColoredPenguin)
+                return true;
+
+            return AnimalIndex == other.AnimalIndex;
+        }
+
         public bool CanMoveInDirection(Point direction)
         {
+            if (!Visible || IsInHole || IsMoving)
+                return false;
+
+            // Check the current tile
+            Tile.Type tileType = level.GetTileType(currentGridPosition);
+            Animal otherAnimal = level.GetAnimal(currentGridPosition);
+
+            if (tileType == Tile.Type.Empty || tileType == Tile.Type.Hole)
+                return false;
+
+            if (otherAnimal != this && otherAnimal != null)
+                return false;
+
+            // Check what's going on at the next tile
+            Point nextPosition = currentGridPosition + direction;
+            Tile.Type nextType = level.GetTileType(nextPosition);
+            Animal nextAnimal = level.GetAnimal(nextPosition);
+
+            // If the next tile is a wall, stop 
+            if (nextType == Tile.Type.Wall)
+                return false;
+
+            // If the next tile contains a animal that does not form a pair
+            if (nextAnimal is MovableAnimal && !IsPairWith((MovableAnimal)nextAnimal))
+                return false;
+
             return true;
         }
     }
