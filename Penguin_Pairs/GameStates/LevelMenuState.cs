@@ -7,7 +7,7 @@ namespace Penguin_Pairs
     internal class LevelMenuState : GameState
     {
         private Button backButton;
-        LevelButton[] levelButtons;
+        private LevelButton[] levelButtons;
 
         public LevelMenuState()
         {
@@ -26,7 +26,7 @@ namespace Penguin_Pairs
             const int spaceBetweenColumns = 30;
             const int spaceBetweenRows = 5;
 
-            for(int i = 0; i < numberOfLevels; i++)
+            for (int i = 0; i < numberOfLevels; i++)
             {
                 LevelButton levelButton = new LevelButton(i + 1, PenguinPairs.GetLevelStatus(i + 1));
 
@@ -47,9 +47,9 @@ namespace Penguin_Pairs
             if (backButton.Pressed)
                 ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_Title);
 
-            foreach(LevelButton button in levelButtons)
+            foreach (LevelButton button in levelButtons)
             {
-                if(button.Pressed && button.Status != LevelStatus.Locked)
+                if (button.Pressed && button.Status != LevelStatus.Locked)
                 {
                     ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_Playing);
                     PlayingState playingstate = (PlayingState)ExtendedGame.GameStateManager.GetGameState(PenguinPairs.StateName_Playing);
@@ -57,6 +57,14 @@ namespace Penguin_Pairs
                     return;
                 }
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            foreach (LevelButton button in levelButtons)
+                if (button.Status != PenguinPairs.GetLevelStatus(button.LevelIndex))
+                    button.Status = PenguinPairs.GetLevelStatus(button.LevelIndex);
         }
     }
 }

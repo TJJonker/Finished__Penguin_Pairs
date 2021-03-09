@@ -139,6 +139,7 @@ namespace Penguin_Pairs
             if(tileType == Tile.Type.Empty)
             {
                 Visible = false;
+                ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_eat");
                 return;
             }
 
@@ -152,6 +153,8 @@ namespace Penguin_Pairs
                 // Notify if there is a pair
                 if (otherAnimal is MovableAnimal)
                     level.PairFound(this, (MovableAnimal)otherAnimal);
+                else
+                    ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_eat");
 
                 return;
             }

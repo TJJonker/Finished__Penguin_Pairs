@@ -96,6 +96,8 @@ namespace Penguin_Pairs
             completedOverlay.Visible = true;
             level.Visible = false;
 
+            ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_won");
+
             PenguinPairs.MarkLevelAsSolved(levelIndex);
         }
     }

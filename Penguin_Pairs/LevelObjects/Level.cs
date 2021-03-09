@@ -178,6 +178,8 @@ namespace Penguin_Pairs
                 PlayingState playingState = (PlayingState)ExtendedGame.GameStateManager.GetGameState(PenguinPairs.StateName_Playing);
                 playingState.LevelCompleted(LevelIndex);
             }
+            else
+                ExtendedGame.AssetManager.PlaySoundEffect("Sounds/snd_pair");
         }
 
         private void AddTile(int x, int y, char symbol)

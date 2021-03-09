@@ -59,6 +59,8 @@ namespace Penguin_Pairs
             GameStateManager.AddGameState(StateName_Playing, new PlayingState());
 
             GameStateManager.SwitchTo(StateName_Title);
+
+            AssetManager.PlaySong("Sounds/snd_music", true);
         }
 
         private void LoadProgress()
