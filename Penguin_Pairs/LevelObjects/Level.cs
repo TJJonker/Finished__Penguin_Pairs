@@ -14,6 +14,7 @@ namespace Penguin_Pairs
 
         private MovableAnimalSelector selector;
 
+        private PairList pairList;
         public int LevelIndex { get; private set; }
         private int targetNuberOfPairs;
 
@@ -46,9 +47,9 @@ namespace Penguin_Pairs
             string title = reader.ReadLine();
             string desciption = reader.ReadLine();
 
-            AddLevelInfoObjects(title, desciption);
-
             targetNuberOfPairs = int.Parse(reader.ReadLine());
+
+            AddLevelInfoObjects(title, desciption);
 
             string[] hint = reader.ReadLine().Split(' ');
             int hintX = int.Parse(hint[0]);
@@ -92,6 +93,10 @@ namespace Penguin_Pairs
             descriptionObject.Text = description;
             descriptionObject.Position = new Vector2(600, 820);
             AddChild(descriptionObject);
+
+            pairList = new PairList(targetNuberOfPairs);
+            pairList.Position = new Vector2(20, 20);
+            AddChild(pairList);
         }
 
         private void AddPlayingField(List<string> gridRows, int gridWidth, int gridHeight)
@@ -139,6 +144,12 @@ namespace Penguin_Pairs
         public void SelectAnimal(MovableAnimal animal)
         {
             selector.SelectedAnimal = animal;
+        }
+
+        public void PairFound(MovableAnimal penguin1, MovableAnimal penguin2)
+        {
+            int penguinType = MathHelper.Max(penguin1.AnimalIndex, penguin2.AnimalIndex);
+            pairList.AddPair(penguinType);
         }
 
         private void AddTile(int x, int y, char symbol)
