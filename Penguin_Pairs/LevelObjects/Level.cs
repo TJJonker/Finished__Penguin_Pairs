@@ -1,7 +1,6 @@
 ﻿using Engine;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
 namespace Penguin_Pairs
@@ -25,6 +24,7 @@ namespace Penguin_Pairs
 
         private int GridWidth
         { get { return tiles.GetLength(0); } }
+
         private int GridHeight
         { get { return tiles.GetLength(1); } }
 
@@ -172,15 +172,11 @@ namespace Penguin_Pairs
             if (result == null)
             {
                 int animalIndex = GetAnimalIndex(symbol);
-                if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, false, this, new Point(x, y));
-            }
+                if (animalIndex < 0)
+                    animalIndex = GetAnimalInHoleIndex(symbol);
 
-            if (result == null)
-            {
-                int animalIndex = GetAnimalInHoleIndex(symbol);
                 if (animalIndex >= 0)
-                    result = new MovableAnimal(animalIndex, true, this, new Point(x, y));
+                    result = new MovableAnimal(animalIndex, this, new Point(x, y));
             }
         }
 

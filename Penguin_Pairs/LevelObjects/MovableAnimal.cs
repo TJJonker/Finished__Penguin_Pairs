@@ -27,10 +27,9 @@ namespace Penguin_Pairs
 
         private bool IsMoving { get { return Position != targetWorldPosition; } }
 
-        public MovableAnimal(int animalIndex, bool isInHole, Level level, Point gridPosition) : 
-            base(level, gridPosition, GetSpriteName(isInHole), animalIndex)
+        public MovableAnimal(int animalIndex, Level level, Point gridPosition) : 
+            base(level, gridPosition, GetSpriteName(false), animalIndex)
         {
-            this.isInHole = isInHole;
             targetWorldPosition = Position;
         }
 
@@ -115,6 +114,37 @@ namespace Penguin_Pairs
                 return false;
 
             return true;
+        }
+
+        protected override void ApplyCurrentPosition()
+        {
+            Position = level.GetCellPosition(currentGridPosition.X, currentGridPosition.Y);
+
+            velocity = Vector2.Zero;
+
+            Tile.Type tileType = level.GetTileType(currentGridPosition);
+            if(tileType == Tile.Type.Empty)
+            {
+                Visible = false;
+                return;
+            }
+
+            Animal otherAnimal = level.GetAnimal(currentGridPosition);
+            if(otherAnimal != null)
+            {
+                level.RemoveAnimalFromGrid(currentGridPosition);
+                Visible = false;
+                otherAnimal.Visible = false;
+
+                // TODO: Notify if there is a pair
+
+                return;
+            }
+
+            level.AddAnimalToGrid(this, currentGridPosition);
+
+            if (tileType == Tile.Type.Hole)
+                IsInHole = true; 
         }
     }
 }
