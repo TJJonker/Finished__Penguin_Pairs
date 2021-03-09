@@ -46,6 +46,9 @@ namespace Penguin_Pairs
 
             if (level != null)
                 level.HandleInput(inputHelper);
+
+            if (hintButton.Pressed)
+                level.ShowHint();
         }
 
         public override void Update(GameTime gameTime)
@@ -53,6 +56,9 @@ namespace Penguin_Pairs
             base.Update(gameTime);
             if (level != null)
                 level.Update(gameTime);
+
+            hintButton.Visible = PenguinPairs.HintsEnabled && !level.FirstMoveMade;
+            retryButton.Visible = level.FirstMoveMade;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -21,6 +21,8 @@ namespace Penguin_Pairs
         private Tile[,] tiles;
         private Animal[,] animalsOnTiles;
 
+        private VisibilityTimer hintTimer;
+        
         private SpriteGameObject hintArrow;
 
         private int GridWidth
@@ -29,10 +31,13 @@ namespace Penguin_Pairs
         private int GridHeight
         { get { return tiles.GetLength(1); } }
 
+        public bool FirstMoveMade { get; private set; }
+
         public Level(int levelIndex, string filename)
         {
             LevelIndex = levelIndex;
             LoadLevelFromFile(filename);
+            FirstMoveMade = false;
         }
 
         public Vector2 GetCellPosition(int x, int y)
@@ -134,11 +139,18 @@ namespace Penguin_Pairs
 
             hintArrow.Visible = false;
             playingField.AddChild(hintArrow);
+            hintTimer = new VisibilityTimer(hintArrow);
+            playingField.AddChild(hintTimer);
 
             selector = new MovableAnimalSelector();
             playingField.AddChild(selector);
 
             AddChild(playingField);
+        }
+
+        public void ShowHint()
+        {
+            hintTimer.StartVisible(2);
         }
 
         public void SelectAnimal(MovableAnimal animal)
@@ -199,6 +211,7 @@ namespace Penguin_Pairs
         public void RemoveAnimalFromGrid(Point gridPosition)
         {
             animalsOnTiles[gridPosition.X, gridPosition.Y] = null;
+            FirstMoveMade = true;
         }
 
         private int GetAnimalIndex(char symbol)
