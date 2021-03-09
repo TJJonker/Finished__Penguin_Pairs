@@ -1,6 +1,6 @@
 ﻿namespace Engine.UI
 {
-    internal class Switch : Button
+    public class Switch : Button
     {
         private bool selected;
         public bool Selected

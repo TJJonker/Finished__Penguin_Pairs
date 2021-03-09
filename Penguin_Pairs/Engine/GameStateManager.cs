@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Engine
 {
-    internal class GameStateManager
+    public class GameStateManager
     {
         private Dictionary<string, GameState> gameStates;
         private GameState currentGameState;

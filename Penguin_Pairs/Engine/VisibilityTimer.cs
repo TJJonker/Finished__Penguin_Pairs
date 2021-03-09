@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    internal class VisibilityTimer : GameObject
+    public class VisibilityTimer : GameObject
     {
         private GameObject target;
         private float timeleft;

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    internal class SpriteGameObject : GameObject
+    public class SpriteGameObject : GameObject
     {
         protected SpriteSheet sprite;
 

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Engine
 {
-    internal class AssetManager
+    public class AssetManager
     {
         ContentManager contentManager;
 

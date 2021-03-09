@@ -2,7 +2,7 @@
 
 namespace Engine.UI
 {
-    internal class Slider : GameObjectList
+    public class Slider : GameObjectList
     {
         private SpriteGameObject back, front;
         private float minValue, maxValue;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Engine
 {
-    internal class GameObjectList : GameObject
+    public class GameObjectList : GameObject
     {
         private List<GameObject> children;
 

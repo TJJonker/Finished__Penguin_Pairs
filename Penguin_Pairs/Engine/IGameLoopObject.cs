@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    internal interface IGameLoopObject
+    public interface IGameLoopObject
     {
         void HandleInput(InputHelper inputHelper);
         void Update(GameTime gameTime);

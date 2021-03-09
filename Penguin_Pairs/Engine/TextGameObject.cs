@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    internal class TextGameObject : GameObject
+    public class TextGameObject : GameObject
     {
         protected SpriteFont font;
         protected Color color;

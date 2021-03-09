@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    internal class SpriteSheet
+    public class SpriteSheet
     {
         private Texture2D sprite;
         private Rectangle spriteRectangle;

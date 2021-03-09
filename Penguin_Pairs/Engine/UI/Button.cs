@@ -1,6 +1,6 @@
 ﻿namespace Engine.UI
 {
-    internal class Button : SpriteGameObject
+    public class Button : SpriteGameObject
     {
         public bool Pressed { get; protected set; }
 

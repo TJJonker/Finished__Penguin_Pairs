@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    abstract class GameObject : IGameLoopObject
+    public abstract class GameObject : IGameLoopObject
     {
         public Vector2 Position { get; set; }
         protected Vector2 velocity;

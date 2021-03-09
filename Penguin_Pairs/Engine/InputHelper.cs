@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Engine
 {
-    internal class InputHelper
+    public class InputHelper
     {
         private MouseState currentMouseState, previousMouseState;
         private KeyboardState currentKeyboardState, previousKeyboardState;

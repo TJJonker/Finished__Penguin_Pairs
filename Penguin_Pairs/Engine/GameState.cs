@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    abstract class GameState : IGameLoopObject
+    public abstract class GameState : IGameLoopObject
     {
         protected GameObjectList gameObjects;
 

@@ -5,7 +5,7 @@ using System;
 
 namespace Engine
 {
-    abstract class ExtendedGame : Game
+    public abstract class ExtendedGame : Game
     {
         protected GraphicsDeviceManager graphics;
         protected SpriteBatch spriteBatch;
