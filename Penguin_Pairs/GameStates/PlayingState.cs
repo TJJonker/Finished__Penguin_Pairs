@@ -45,17 +45,26 @@ namespace Penguin_Pairs
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (quitButton.Pressed)
-                ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_LevelMenu);
 
-            if (level != null)
-                level.HandleInput(inputHelper);
+            if (completedOverlay.Visible)
+            {
+                if (inputHelper.MouseLeftButtonPressed())
+                    PenguinPairs.GoToNextLevel(level.LevelIndex);
+            }
+            else
+            {
+                if (quitButton.Pressed)
+                    ExtendedGame.GameStateManager.SwitchTo(PenguinPairs.StateName_LevelMenu);
 
-            if (hintButton.Pressed)
-                level.ShowHint();
+                if (level != null)
+                    level.HandleInput(inputHelper);
 
-            if (retryButton.Pressed)
-                level.Reset();
+                if (hintButton.Pressed)
+                    level.ShowHint();
+
+                if (retryButton.Pressed)
+                    level.Reset();
+            }
         }
 
         public override void Update(GameTime gameTime)

@@ -103,5 +103,17 @@ namespace Penguin_Pairs
             if (text == "unlocked") return LevelStatus.Unlocked;
             return LevelStatus.Solved;
         }
+
+        public static void GoToNextLevel(int levelIndex)
+        {
+            if (levelIndex == NumberOfLevels)
+                GameStateManager.SwitchTo(StateName_LevelMenu);
+
+            else
+            {
+                PlayingState playingState = (PlayingState)GameStateManager.GetGameState(StateName_Playing);
+                playingState.LoadLevel(levelIndex + 1);
+            }
+        }
     }
 }
